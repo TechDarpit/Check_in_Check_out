@@ -1,0 +1,11 @@
+.heading {
+  margin: 10px 60px 10px 70px;
+  padding: 10px;
+  /* border: 2px solid black; */
+}
+
+.footer {
+  margin: 30px 60px 10px 60px;
+  padding: 10px;
+  text-align: center;
+}
