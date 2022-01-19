@@ -7,6 +7,7 @@ const checkInLable = document.getElementById("checkInLable");
 const checkOutLable = document.getElementById("checkOutLable");
 const totalWorkHrLable = document.getElementById("totalWorkHrLable");
 const totalBreakTimeLable = document.getElementById("totalBreakTimeLable");
+const breakinoutSec = document.getElementById("breakinout");
 // console.log(table);
 
 let checkInTime = 0;
@@ -14,7 +15,6 @@ let checkOutTime = 0;
 let breakInTime = 0;
 let breakOutTime = 0;
 let breaks = [];
-// let breakDuration = 0;
 
 function getTime() {
   const dt = new Date();
@@ -25,6 +25,9 @@ const checkInTimeHandler = () => {
   checkInTime = getTime();
   console.log(`Check In : ${checkInTime}`);
   checkInLable.innerHTML = `Check-in Time: ${secToStr(checkInTime)}`;
+  breakinoutSec.classList.remove("disp");
+  checkOutBtn.disabled = false;
+  checkInBtn.disabled = true;
 };
 
 const checkOutTimeHandler = () => {
@@ -33,13 +36,22 @@ const checkOutTimeHandler = () => {
   checkOutLable.innerHTML = `Check-in Time: ${secToStr(checkOutTime)}`;
   const totalBreak = breaks.reduce((a, b) => a + b, 0);
   totalBreakTimeLable.innerHTML = `Total Break Time: ${secToStr(totalBreak)}`;
-  totalWorkHrLable.innerHTML = `Total Working Hour:  ${secToStr(checkOutTime - checkInTime)}`;
+  totalWorkHrLable.innerHTML = `Total Working Hour:  ${secToStr(
+    checkOutTime - checkInTime
+  )}`;
+
+  checkOutBtn.disabled = true
+  checkInBtn.disabled = false
+  breakinoutSec.classList.add("disp");
 
 };
 
 const breakInTimeHandler = () => {
   breakInTime = getTime();
   console.log(`Break In: ${breakInTime}`);
+  breakInBtn.disabled = true;
+  breakOutBtn.disabled = false;
+  checkOutBtn.disabled = true;
 };
 
 const breakOutTimeHandler = () => {
@@ -58,6 +70,9 @@ const breakOutTimeHandler = () => {
   `;
   // console.log(htmlRow);
   table.insertAdjacentHTML("beforeend", htmlRow);
+  breakInBtn.disabled = false;
+  breakOutBtn.disabled = true;
+  checkOutBtn.disabled = false;
 };
 
 function secToStr(sectime) {

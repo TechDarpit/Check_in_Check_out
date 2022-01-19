@@ -28,6 +28,10 @@
   /* background-color: blue; */
 }
 
+.disp{
+  display: none;
+}
+
 .btn {
   margin: 0px 20px;
   width: 50%;
