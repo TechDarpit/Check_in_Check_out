@@ -37,13 +37,12 @@ const checkOutTimeHandler = () => {
   const totalBreak = breaks.reduce((a, b) => a + b, 0);
   totalBreakTimeLable.innerHTML = `Total Break Time: ${secToStr(totalBreak)}`;
   totalWorkHrLable.innerHTML = `Total Working Hour:  ${secToStr(
-    checkOutTime - checkInTime
+    checkOutTime - checkInTime - totalBreak
   )}`;
 
-  checkOutBtn.disabled = true
-  checkInBtn.disabled = false
+  checkOutBtn.disabled = true;
+  checkInBtn.disabled = false;
   breakinoutSec.classList.add("disp");
-
 };
 
 const breakInTimeHandler = () => {
