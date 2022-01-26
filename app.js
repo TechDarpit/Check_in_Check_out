@@ -63,8 +63,7 @@ const outTimeHandler = () => {
   lastTableRow.innerHTML = updateHtmlRow;
 
   checkOutLable.innerHTML = `Check-out Time: ${secToStr(outTime)}`;
-  totalWorkings += breakOutTime - breakInTime;
-  //   console.log(totalWorkings);
+  totalWorkings += (breakOutTime - breakInTime);
   totalWorkHrLable.innerHTML = `Total Working Hour: ${secToStr(totalWorkings)}`;
 
   currentLable.innerHTML = "Checked Out";
