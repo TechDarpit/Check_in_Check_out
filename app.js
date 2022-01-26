@@ -1,13 +1,10 @@
 const checkInBtn = document.getElementById("checkInBtn");
 const checkOutBtn = document.getElementById("checkOutBtn");
-const breakInBtn = document.getElementById("breakInBtn");
-const breakOutBtn = document.getElementById("breakOutBtn");
 const table = document.getElementById("tbody");
 const checkInLable = document.getElementById("checkInLable");
 const checkOutLable = document.getElementById("checkOutLable");
 const totalWorkHrLable = document.getElementById("totalWorkHrLable");
 const totalBreakTimeLable = document.getElementById("totalBreakTimeLable");
-const breakinoutSec = document.getElementById("breakinout");
 // console.log(table);
 
 let checkInTime = 0;
@@ -83,5 +80,3 @@ function secToStr(sectime) {
 
 checkInBtn.addEventListener("click", checkInTimeHandler);
 checkOutBtn.addEventListener("click", checkOutTimeHandler);
-breakInBtn.addEventListener("click", breakInTimeHandler);
-breakOutBtn.addEventListener("click", breakOutTimeHandler);
