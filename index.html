@@ -36,7 +36,7 @@
     <!-- Main body -->
     <main>
       <div class="container">
-        <div class="chickinout" id="chickinout">
+        <div class="chickinout">
           <button type="button" id="checkInBtn" class="btn btn-success btn-lg">
             Check In
           </button>
@@ -44,17 +44,20 @@
             Check Out
           </button>
         </div>
+
+        <hr />
+          <h3 class="currentLable" id="currentLable">Checked In / Checked Out</h3>
         <hr />
 
         <div>
-          <h4>Break Table</h4>
+          <h4>Working Hour Table</h4>
           <table class="table table-danger table-hover">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Break In</th>
-                <th scope="col">Break Out</th>
-                <th scope="col">Break Duration</th>
+                <th scope="col">Check In</th>
+                <th scope="col">Check Out</th>
+                <th scope="col">Work Duration</th>
               </tr>
             </thead>
             <tbody id="tbody">
@@ -67,8 +70,8 @@
 
         <div class="time">
           <div class="row">
-            <div class="col"><h5 id="checkInLable">Check-in Time: 00:00:00</h5></div>
-            <div class="col"><h5 id="checkOutLable">Check-out Time: 00:00:00</h5></div>
+            <div class="col"><h5 id="checkInLable">Check-in Time: 00 : 00 : 00</h5></div>
+            <div class="col"><h5 id="checkOutLable">Check-out Time: 00 : 00 : 00</h5></div>
           </div>
         </div>
 
@@ -76,8 +79,8 @@
 
         <div class="time">
           <div class="row">
-            <div class="col"><h5 id="totalWorkHrLable">Total Working Hour: 00:00:00</h5></div>
-            <div class="col"><h5 id="totalBreakTimeLable">Total Break Time: 00:00:00</h5></div>
+            <div class="col"><h5 id="totalWorkHrLable">Total Working Hour: 00 : 00 : 00</h5></div>
+            <div class="col"><h5 id="totalBreakTimeLable">Total Break Time: 00 : 00 : 00</h5></div>
           </div>
         </div>
 

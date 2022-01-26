@@ -18,8 +18,11 @@
   /* background-color: #8a2be2; */
 }
 
-.chickinout,
-.breakinout {
+.currentLable{
+  text-align: center;
+}
+
+.chickinout {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,7 +31,7 @@
   /* background-color: blue; */
 }
 
-.disp{
+.disp {
   display: none;
 }
 
@@ -37,6 +40,6 @@
   width: 50%;
 }
 
-.time{
-    padding: 10px auto;
+.time {
+  padding: 10px auto;
 }

@@ -5,78 +5,79 @@ const checkInLable = document.getElementById("checkInLable");
 const checkOutLable = document.getElementById("checkOutLable");
 const totalWorkHrLable = document.getElementById("totalWorkHrLable");
 const totalBreakTimeLable = document.getElementById("totalBreakTimeLable");
-// console.log(table);
+const currentLable = document.getElementById("currentLable");
 
-let checkInTime = 0;
-let checkOutTime = 0;
-let breakInTime = 0;
-let breakOutTime = 0;
-let breaks = [];
+let breakInTime,
+  breakOutTime,
+  totalWorkings = 0,
+  breakDuration = 0,
+  counter = 1;
 
-function getTime() {
+const getTime = () => {
   const dt = new Date();
-  return (dt.getTime() / 1000).toFixed(0);
-}
+  return dt.getHours() * 3600 + dt.getMinutes() * 60 + dt.getSeconds();
+};
 
-const checkInTimeHandler = () => {
-  checkInTime = getTime();
-  console.log(`Check In : ${checkInTime}`);
-  checkInLable.innerHTML = `Check-in Time: ${secToStr(checkInTime)}`;
-  breakinoutSec.classList.remove("disp");
+const inTimeHandler = () => {
+  const inTime = getTime();
+  if (!breakInTime) {
+    checkInLable.innerHTML = `Check-in Time: ${secToStr(inTime)}`;
+  }
+  breakInTime = inTime;
+
+  const htmlRow = `
+    <tr>
+      <th scope="row">${counter}</th>
+      <td>${secToStr(breakInTime)}</td>
+      <td>00 : 00 : 00</td>
+      <td>00 : 00 : 00</td>
+    </tr>
+    `;
+  table.insertAdjacentHTML("beforeend", htmlRow);
+
+  if (!!breakOutTime) {
+    breakDuration += (breakOutTime - breakInTime) * -1;
+    totalBreakTimeLable.innerHTML = `Total Break Time: ${secToStr(
+      breakDuration
+    )}`;
+  }
+
+  currentLable.innerHTML = "Checked In";
   checkOutBtn.disabled = false;
   checkInBtn.disabled = true;
 };
 
-const checkOutTimeHandler = () => {
-  checkOutTime = getTime();
-  console.log(`Check out: ${checkOutTime}`);
-  checkOutLable.innerHTML = `Check-in Time: ${secToStr(checkOutTime)}`;
-  const totalBreak = breaks.reduce((a, b) => a + b, 0);
-  totalBreakTimeLable.innerHTML = `Total Break Time: ${secToStr(totalBreak)}`;
-  totalWorkHrLable.innerHTML = `Total Working Hour:  ${secToStr(
-    checkOutTime - checkInTime - totalBreak
-  )}`;
+const outTimeHandler = () => {
+  const outTime = getTime();
 
-  checkOutBtn.disabled = true;
-  checkInBtn.disabled = false;
-  breakinoutSec.classList.add("disp");
-};
-
-const breakInTimeHandler = () => {
-  breakInTime = getTime();
-  console.log(`Break In: ${breakInTime}`);
-  breakInBtn.disabled = true;
-  breakOutBtn.disabled = false;
-  checkOutBtn.disabled = true;
-};
-
-const breakOutTimeHandler = () => {
-  breakOutTime = getTime();
-  console.log(`Break Out: ${breakOutTime}`);
-  const breakDuration = breakOutTime - breakInTime;
-  breaks.push(breakDuration);
-  console.log(breaks);
-  const htmlRow = `
+  breakOutTime = outTime;
+  const lastTableRow = table.rows[table.rows.length - 1];
+  const updateHtmlRow = `
   <tr>
-    <th scope="row">${breaks.length}</th>
+    <th scope="row">${counter++}</th>
     <td>${secToStr(breakInTime)}</td>
     <td>${secToStr(breakOutTime)}</td>
-    <td>${secToStr(breakDuration)}</td>
+    <td>${secToStr(breakOutTime - breakInTime)}</td>
   </tr>
   `;
-  // console.log(htmlRow);
-  table.insertAdjacentHTML("beforeend", htmlRow);
-  breakInBtn.disabled = false;
-  breakOutBtn.disabled = true;
-  checkOutBtn.disabled = false;
+  lastTableRow.innerHTML = updateHtmlRow;
+
+  checkOutLable.innerHTML = `Check-out Time: ${secToStr(outTime)}`;
+  totalWorkings += breakOutTime - breakInTime;
+  //   console.log(totalWorkings);
+  totalWorkHrLable.innerHTML = `Total Working Hour: ${secToStr(totalWorkings)}`;
+
+  currentLable.innerHTML = "Checked Out";
+  checkOutBtn.disabled = true;
+  checkInBtn.disabled = false;
 };
 
-function secToStr(sectime) {
+const secToStr = (sectime) => {
   const Hr = Math.floor((sectime / 3600) % 24);
   const Min = Math.floor((sectime / 60) % 60);
   const Sec = sectime % 60;
-  return Hr + ":" + Min + ":" + Sec;
-}
+  return Hr + " : " + Min + " : " + Sec;
+};
 
-checkInBtn.addEventListener("click", checkInTimeHandler);
-checkOutBtn.addEventListener("click", checkOutTimeHandler);
+checkInBtn.addEventListener("click", inTimeHandler);
+checkOutBtn.addEventListener("click", outTimeHandler);
